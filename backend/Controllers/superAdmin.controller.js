@@ -12,13 +12,13 @@ export const superAdminLogin = async (req, res) => {
     const superAdmin = await superAdminModel.findOne({ username });
 
     if (!superAdmin) {
-      return res.status(403).json({ msg: "SuperAdmin Not Found" });
+      return res.status(404).json({ msg: "SuperAdmin Not Found" });
     }
 
     const isMatch = await bcrypt.compare(password, superAdmin.password);
 
     if (!isMatch) {
-      return res.status(403).json({ msg: "Incorrect password" });
+      return res.status(404).json({ msg: "Incorrect password" });
     }
     const id = superAdmin._id.toString();
     const token = jwt.sign(id, process.env.JWT_SECRET);
@@ -71,7 +71,7 @@ export const createSubAdmins = async (req, res) => {
       msg: "Sub Admin Created Successfully",
     });
   } catch (error) {
-    res.status(500).json({ msg: "Cannot create subAdmins at the moment" });
+    res.status(500).json({ msg: "Cannot create subAdmins at the moment",err:error });
   }
 };
 

@@ -14,19 +14,25 @@ function SuperAdminLogin() {
         username,
         password
       });
-
-      if (res.status !== 200) {
-        alert(res.data.msg);
-      } else {
-        alert(res.data.msg);
-        localStorage.setItem("token", res.data.token);
-        navigate("dashboard");
-      }
+  
+      // if request succeeds (200)
+      alert(res.data.msg);
+      localStorage.setItem("token", res.data.token);
+      navigate("dashboard");
+      
     } catch (error) {
-      alert("Internal Server Error");
+      if (error.response) {
+        // Backend sent a response
+        console.log(error); // for debugging
+        alert(error.response.data.msg);
+      } else {
+        // No response
+        console.error(error.message);
+        alert("Something went wrong. Please try again.");
+      }
     }
   };
-
+  
   return (
     <form onSubmit={handleSubmit}>
       <div>
