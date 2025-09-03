@@ -5,6 +5,7 @@ import {
   deleteSubAdmin,
   listSubAdmins,
   superAdminLogin,
+  viewAdsApplication,
 } from "../Controllers/superAdmin.controller.js";
 
 const superAdminRouter = Router();
@@ -19,5 +20,6 @@ superAdminRouter.delete(
   superAdminAuth,
   deleteSubAdmin
 );
+superAdminRouter.get("/viewAdsApplications", superAdminAuth, viewAdsApplication);
 
 export { superAdminRouter };

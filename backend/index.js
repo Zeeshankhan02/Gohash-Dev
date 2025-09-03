@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import { superAdminRouter } from "./Routes/superAdmin.route.js";
 import mongoose from "mongoose";
-
 import "dotenv/config";
+import { adRouter } from "./Routes/adApplication.route.js";
 
 async function dbConnect() {
   try {
@@ -23,6 +23,7 @@ app.use(cors());
 app.set("view engine", "ejs");
 
 app.use("/api/v1/superAdmin", superAdminRouter);
+app.use("/api/v1/createAd", adRouter);
 
 app.listen(3000, () => {
   console.log("Server is Running");
