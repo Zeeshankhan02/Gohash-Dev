@@ -2,10 +2,6 @@ import { subAdminModel } from "../Models/subAdmin.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const testing = function (req, res) {
-  res.send('login page ');
-};
-
 export const loginPost = async function (req, res) {
   try {
     const { email, password } = req.body;
@@ -16,6 +12,7 @@ export const loginPost = async function (req, res) {
 
     // 1. Find user
     const subAdmin = await subAdminModel.findOne({ email });
+    console.log("SubAdmin from DB:", subAdmin);
     if (!subAdmin) {
       return res.status(404).json({ msg: "SubAdmin not found" });
     }
@@ -43,7 +40,7 @@ export const loginPost = async function (req, res) {
       user: {
         id: subAdmin._id,
         email: subAdmin.email,
-        username: subAdmin.username,
+        fullname: subAdmin.fullname,
       },
     });
   } catch (error) {
