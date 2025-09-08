@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SuperAdminNav from "./SuperAdminNav";
-import "./SuperAdminPages.css";
+import "./CSS/SuperAdminPages.css";
 
 function ListSubAdmins() {
   const [subAdmins, setSubAdmins] = useState([]);

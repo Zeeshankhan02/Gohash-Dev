@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import SuperAdminNav from "./SuperAdminNav";
-import "./SuperAdminPages.css";
+import "./CSS/SuperAdminPages.css";
 import axios from "axios";
 
 function CreateSubAdmin() {
@@ -29,19 +29,21 @@ function CreateSubAdmin() {
       );
 
       alert(res.data.msg);
+      fullNameRef.current.value = "";
+      emailRef.current.value = "";
+      passwordRef.current.value = "";
     } catch (error) {
       if (error.response) {
-        // Backend sent a response (e.g. 404, 403, 500)
+        // Backend sent a response 
         console.log(error); // for debugging
         alert(error.response.data.msg);
       } else {
-        // No response (network error, server down, etc.)
+        // No response 
         console.error(error.message);
         alert("Something went wrong. Please try again.");
       }
     }
 
-    // console.log(res.data);
   }
   return (
     <div className="superadmin-page">
@@ -57,11 +59,18 @@ function CreateSubAdmin() {
               ref={fullNameRef}
               name="fullName"
               id="SAfullName"
+              autoComplete="off"
             />
           </label>
           <label htmlFor="SAemail">
             Email
-            <input type="text" ref={emailRef} name="email" id="SAemail" />
+            <input
+              type="email"
+              ref={emailRef}
+              name="email"
+              id="SAemail"
+              autoComplete="off"
+            />
           </label>
           <label htmlFor="SApassword">
             password
@@ -70,6 +79,7 @@ function CreateSubAdmin() {
               ref={passwordRef}
               name="password"
               id="SApassword"
+              autoComplete="off"
             />
           </label>
         </div>

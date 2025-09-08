@@ -1,20 +1,28 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import './App.css';
-import SuperAdminLoginLayout from './Components/SuperAdminLoginLayout';
-import SuperAdminLogin from './Components/SuperAdminLogin';
-import SuperAdminDash from './Components/SuperAdminDash';
-import ProtectedRoute from './Components/ProtectedRoute';
+import SuperAdminLoginLayout from './Components/Layouts/SuperAdminLoginLayout';
+import SuperAdminLogin from './Components/SuperAdmin/SuperAdminLogin';
+import SuperAdminDash from './Components/SuperAdmin/SuperAdminDash';
+import ProtectedRoute from './Components/SuperAdmin/ProtectedRoute';
 
 // New pages
-import ListSubAdmins from './Components/ListSubAdmins';
-import CreateSubAdmin from './Components/CreateSubAdmin';
-import ViewAdsApplication from './Components/ViewAdsApplication';
+import ListSubAdmins from './Components/SuperAdmin/ListSubAdmins';
+import CreateSubAdmin from './Components/SuperAdmin/CreateSubAdmin';
+import ViewAdsApplication from './Components/SuperAdmin/ViewAdsApplication';
+import SubAdminLayout from "./Components/Layouts/SubAdminLayout";
+import SubAdminLogin from "./Components/SubAdmin/SubAdminLogin";
+import CreateNews from "./Components/SubAdmin/CreateNews";
+import Home from "./Components/User/Home";
+import AdApplication from "./Components/User/AdApplication";
+import HomeLayout from "./Components/Layouts/HomeLayout";
+import News from "./Components/User/News";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Parent layout */}
+
+        {/* Super Admin Parent layout */}
         <Route path="/secret/superAdmin" element={<SuperAdminLoginLayout />}>
           {/* Public login */}
           <Route index element={<SuperAdminLogin />} />
@@ -53,6 +61,21 @@ function App() {
             }
           />
         </Route>
+        
+        {/* Sub Admin Parent Layout */}
+        <Route path="/secret/subAdmin" element={<SubAdminLayout/>}>
+            <Route index element={<SubAdminLogin/>}/>
+            <Route path="create-news" element={<CreateNews/>}/>
+        </Route>
+
+        {/* General Routes */}  
+        <Route element={<HomeLayout/>}>
+        <Route path="/" element={<Home/>}/>
+        <Route index element={<Navigate to="general" replace />} />
+        <Route path=":category" element={<News/>}/>
+        <Route path="/apply-for-ads" element={<AdApplication/>}/>
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );
