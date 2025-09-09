@@ -2,8 +2,6 @@ import { subAdminModel } from "../Models/subAdmin.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { createNewsModel } from "../Models/createNews.model.js";
-import mongoose from "mongoose";
-
 export const loginPost = async function (req, res) {
   try {
     const { email, password } = req.body;
@@ -51,6 +49,34 @@ export const loginPost = async function (req, res) {
     
   }
 };
+
+export const viewNewsCreated = async (req,res) => {
+  
+  try {
+
+    console.log(req.user.id)
+
+    const allNewsArticles = await createNewsModel.find({
+      createdBy:req.user.id
+    })
+
+    if (!allNewsArticles) return res.json({
+      msg:"No articles found"
+    })
+
+    res.json({
+      msg:"ALl news articles Fetched successfully",
+      articlesCreated:allNewsArticles
+    })
+    
+  } catch (error) {
+    return res.josn({
+      msg:"internal server error"
+    })
+  }
+
+
+}
 
 
 export const deleteNews = async (req,res) => {
