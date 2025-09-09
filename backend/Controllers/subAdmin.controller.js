@@ -1,6 +1,8 @@
 import { subAdminModel } from "../Models/subAdmin.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { createNewsModel } from "../Models/createNews.model.js";
+import mongoose from "mongoose";
 
 export const loginPost = async function (req, res) {
   try {
@@ -49,3 +51,28 @@ export const loginPost = async function (req, res) {
     
   }
 };
+
+
+export const deleteNews = async (req,res) => {
+  const {articleId} =req.params
+  console.log(articleId);
+  
+
+  try {
+    const deleteNews = await createNewsModel.findByIdAndDelete(articleId)
+
+    if (!deleteNews) return res.status(400).json({
+      msg:"Failed to delete"
+    })
+
+    res.status(200).json({
+      msg:"deleted successfully",
+      news:deleteNews
+    })
+
+  } catch (error) {
+    res.status(500).json({
+      msg:"Internal server error"
+    })
+  }
+}

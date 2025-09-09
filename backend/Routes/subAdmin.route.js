@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { loginPost } from '../Controllers/subAdmin.controller.js';
+import { deleteNews, loginPost } from '../Controllers/subAdmin.controller.js';
 
 
 const router = Router();
@@ -9,6 +9,6 @@ router.route("/login")
 .post(loginPost)
 
 
-
+router.delete("/deleteNews/:articleId",deleteNews)
 
 export default router;
