@@ -16,9 +16,9 @@ function SuperAdminLogin() {
       });
   
       // if request succeeds (200)
-      alert(res.data.msg);
       localStorage.setItem("token", res.data.token);
       navigate("dashboard");
+      alert(res.data.msg);
       
     } catch (error) {
       if (error.response) {
@@ -36,12 +36,13 @@ function SuperAdminLogin() {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="username">Email:</label>
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
           id="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          autoComplete='off'
           required
         />
       </div>
@@ -52,6 +53,7 @@ function SuperAdminLogin() {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete='off'
           required
         />
       </div>

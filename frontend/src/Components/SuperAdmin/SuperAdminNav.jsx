@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import "./SuperAdminNav.css";
+import "./CSS/SuperAdminNav.css";
 
 function SuperAdminNav() {
   const navigate = useNavigate();

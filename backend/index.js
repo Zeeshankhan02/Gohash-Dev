@@ -5,7 +5,7 @@ import { superAdminRouter } from './Routes/superAdmin.route.js';
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
-import { adRouter } from './Routes/adApplication.route.js';
+import { userRouter } from './Routes/user.route.js';
 import subAdmin from './Routes/subAdmin.route.js';
 import createNewsRoutes from "./Routes/createNews.route.js";
 
@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/superAdmin', superAdminRouter);
 app.use('/api/v1/subAdmin', subAdmin);
-app.use('/api/v1/createAd', adRouter);
+app.use('/api/v1/users', userRouter);
 app.use("/api/v1/subAdmin", createNewsRoutes);
 
 app.listen(process.env.PORT, () => {

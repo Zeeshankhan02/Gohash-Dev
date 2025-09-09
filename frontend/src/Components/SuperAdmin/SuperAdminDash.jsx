@@ -1,12 +1,12 @@
 import SuperAdminNav from "./SuperAdminNav";
-import "./SuperAdminPages.css";
+import "./CSS/SuperAdminPages.css";
 
 function SuperAdminDash() {
   return (
     <div className="superadmin-page">
       <h1>Super Admin Dashboard</h1>
       <SuperAdminNav />
-      <p>Welcome! Choose an option from the navbar above.</p>
+      <p>Choose an option from the navbar above.</p>
     </div>
   );
 }
