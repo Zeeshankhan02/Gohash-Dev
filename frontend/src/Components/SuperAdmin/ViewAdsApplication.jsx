@@ -14,7 +14,7 @@ function ViewAdsApplication() {
         `${import.meta.env.VITE_BACKEND_URL}/superAdmin/viewAdsApplications`,
         { headers: { token: token } }
       );
-      setAdsApplication(res.data.applications);
+      setAdsApplication(res.data.applications.reverse());
     } catch (error) {
       console.error("Error fetching ads applications", error);
     } finally {

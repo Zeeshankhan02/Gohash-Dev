@@ -6,7 +6,7 @@ function CreateNews() {
     title: "",
     description: "",
     link: "",
-    resourceType: "image",
+    // resourceType: "image",
     newsType: "general",
   });
 
@@ -37,7 +37,7 @@ function CreateNews() {
         title: "",
         description: "",
         link: "",
-        resourceType: "image",
+        // resourceType: "image",
         newsType: "general",
       });
     } catch (error) {
@@ -103,13 +103,13 @@ function CreateNews() {
               value={formData.link}
               onChange={handleChange}
               className="form-control border border-danger shadow-sm"
-              placeholder="Paste YouTube iframe or image link"
+              placeholder="Paste YouTube link"
               required
             />
           </div>
 
           {/* Resource Type */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label fw-semibold">Resource Type</label>
             <select
               name="resourceType"
@@ -120,7 +120,7 @@ function CreateNews() {
               <option value="image">Image</option>
               <option value="video">Video</option>
             </select>
-          </div>
+          </div> */}
 
           {/* News Type */}
           <div className="mb-4">
@@ -133,6 +133,7 @@ function CreateNews() {
             >
               <option value="general">General</option>
               <option value="dailyBulletin">Headline</option>
+              <option value="ad">Ad</option>
             </select>
           </div>
 

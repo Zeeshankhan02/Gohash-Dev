@@ -20,7 +20,6 @@ function News() {
       setLoader(false)
     } catch (error) {
       if (error.response) {
-        // alert(error.response.data);
         console.log("failed");
         setLoader(false)
         
@@ -39,7 +38,7 @@ function News() {
 
 
   return (
-    <div style={{height:"100vh"}}>
+    <div style={{}}>
       
       {loader?"loading...":newsArticles.length > 0 ? (
           <div  >
@@ -54,7 +53,6 @@ function News() {
             No articles found
           </p>
         )}
-{/* https://youtu.be/IgmvpWK9cBM?si=0mTZmUYhKT9mzA_d */}
     </div>
   )
 }

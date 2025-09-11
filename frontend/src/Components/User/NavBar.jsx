@@ -29,18 +29,16 @@ function NavBar() {
         {/* Navbar Links */}
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
-
-            
                   <li className="nav-item mx-2 my-1 my-lg-0">
               <NavLink
-                to="/home"
+                to="/"
                 className={({ isActive }) =>
                   isActive
                     ? "btn btn-danger fw-bold px-3"
                     : "btn btn-outline-danger fw-semibold px-3"
                 }
               >
-                home
+                Home
               </NavLink>
             </li>
             <li className="nav-item mx-2 my-1 my-lg-0">
@@ -64,7 +62,7 @@ function NavBar() {
                     : "btn btn-outline-danger fw-semibold px-3"
                 }
               >
-                Headlines
+                Daily Bulletin
               </NavLink>
             </li>
             <li className="nav-item mx-2 my-1 my-lg-0">

@@ -1,14 +1,12 @@
-import NewsArticleCard from "./NewsArticleCard"
+// import NewsArticleCard from "./NewsArticleCard"
 
 
-function Home() {
-  return (
-    <div style={{height:"100vh"}}>
-      <NewsArticleCard/>
+// function Home() {
+//   return (
+//     <div style={{height:"100vh"}}>
+//       <NewsArticleCard/>
+//     </div>
+//   )
+// }
 
- 
-    </div>
-  )
-}
-
-export default Home
+// export default Home
