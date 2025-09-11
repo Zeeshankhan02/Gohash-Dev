@@ -145,6 +145,7 @@ function HomePage() {
                   />
                   <div className="card-body">
                     <h6 className="fw-semibold">{article.title}</h6>
+                    <p className="small text-muted text-truncate">{article.description}</p>
                   </div>
                 </div>
               </div>
@@ -177,6 +178,7 @@ function HomePage() {
                   />
                   <div className="card-body">
                     <p>{ad.title}</p>
+                    <p>{ad.description}</p>
                   </div>
                 </div>
               </div>

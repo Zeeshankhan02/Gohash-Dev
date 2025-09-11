@@ -32,7 +32,7 @@ export const createNews = async (req, res) => {
     }
 
     // Only allow specific types
-    if (!["general", "dailyBulletin"].includes(type)) {
+    if (!["general", "dailyBulletin","ads"].includes(type)) {
       return res.status(400).json({ msg: "Invalid news type" });
     }
 
@@ -49,7 +49,7 @@ export const createNews = async (req, res) => {
     });
 
     await news.save();
-    res.status(201).json({ msg: "News created successfully", news });
+    type=="ads"?res.status(201).json({ msg: "Ad created successfully", news }):res.status(201).json({ msg: "News created successfully", news });
   } catch (err) {
     console.error("Create News Error:", err);
     res.status(500).json({ msg: "Internal Server Error" });

@@ -38,7 +38,7 @@ function News() {
 
 
   return (
-    <div style={{}}>
+    <div>
       
       {loader?"loading...":newsArticles.length > 0 ? (
           <div  >

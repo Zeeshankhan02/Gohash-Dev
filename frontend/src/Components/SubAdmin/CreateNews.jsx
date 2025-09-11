@@ -10,6 +10,8 @@ function CreateNews() {
     newsType: "general",
   });
 
+  const [loading, setLoading] = useState(false);
+
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -18,6 +20,7 @@ function CreateNews() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
+      setLoading(true)
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/subAdmin/createNews`,
         {
@@ -41,8 +44,10 @@ function CreateNews() {
         newsType: "general",
       });
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      alert(error.response.data.msg);
       console.error(error);
+    } finally{
+      setLoading(false)
     }
   }
 
@@ -133,17 +138,21 @@ function CreateNews() {
             >
               <option value="general">General</option>
               <option value="dailyBulletin">Headline</option>
-              <option value="ad">Ad</option>
+              <option value="ads">Ad</option>
             </select>
           </div>
 
           {/* Submit Button */}
           <div className="d-grid">
-            <button
+          <button
               type="submit"
-              className="btn btn-danger btn-lg fw-bold shadow-sm"
+              className="btn btn-danger fw-bold"
+              disabled={loading}
             >
-              Create News
+              {loading ? (
+                <span className="spinner-border spinner-border-sm me-2"></span>
+              ) : null}
+              {loading ? "Creating News..." : "Create News"}
             </button>
           </div>
         </form>
