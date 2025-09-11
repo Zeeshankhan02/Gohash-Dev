@@ -12,7 +12,6 @@ export const loginPost = async function (req, res) {
 
     // 1. Find user
     const subAdmin = await subAdminModel.findOne({ email });
-    console.log("SubAdmin from DB:", subAdmin);
     if (!subAdmin) {
       return res.status(404).json({ msg: "SubAdmin not found" });
     }
@@ -54,10 +53,9 @@ export const viewNewsCreated = async (req,res) => {
   
   try {
 
-    console.log(req.user.id)
-
     const allNewsArticles = await createNewsModel.find({
-      createdBy:req.user.id
+      createdBy:req.user.id,
+      type: { $in: ["dailyBulletin", "general"] }
     })
 
     if (!allNewsArticles) return res.json({
@@ -65,7 +63,7 @@ export const viewNewsCreated = async (req,res) => {
     })
 
     res.json({
-      msg:"ALl news articles Fetched successfully",
+      msg:"All news articles Fetched successfully",
       articlesCreated:allNewsArticles
     })
     
@@ -81,9 +79,6 @@ export const viewNewsCreated = async (req,res) => {
 
 export const deleteNews = async (req,res) => {
   const {articleId} =req.params
-  console.log(articleId);
-  
-
   try {
     const deleteNews = await createNewsModel.findByIdAndDelete(articleId)
 

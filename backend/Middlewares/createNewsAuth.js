@@ -12,19 +12,12 @@ export const verifyToken = (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   try {
+    
     // 3. Verify karo token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    console.log(authHeader);
-    console.log("token",token);
-    console.log("process.env.JWT_SECRET",process.env.JWT_SECRET);
-    
-    
-    
     // 4. User ki info request object me save karo
     req.user = decoded;
-    console.log("Decoded Token:", decoded);
-
 
     // 5. Next function chalao
     next();
