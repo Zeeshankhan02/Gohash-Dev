@@ -12,7 +12,6 @@ import ViewAdsApplication from './Components/SuperAdmin/ViewAdsApplication';
 import SubAdminLayout from "./Components/Layouts/SubAdminLayout";
 import SubAdminLogin from "./Components/SubAdmin/SubAdminLogin";
 import CreateNews from "./Components/SubAdmin/CreateNews";
-import Home from "./Components/User/Home";
 import AdApplication from "./Components/User/AdApplication";
 import HomeLayout from "./Components/Layouts/HomeLayout";
 import News from "./Components/User/News";
@@ -70,9 +69,7 @@ function App() {
 
         {/* General Routes */}  
         <Route element={<HomeLayout/>}>
-        <Route path="/" element={<Home/>}/>
-        <Route   path="/home" element={<HomePage/>} />
-        {/* <Route path="/general" element={<Navigate to="general" replace />} /> */}
+        <Route   path="/" element={<HomePage/>} />
         <Route path=":category" element={<News/>}/>
         <Route path="/apply-for-ads" element={<AdApplication/>}/>
         </Route>

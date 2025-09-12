@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-danger text-light text-center py-4 mt-5">
+    <footer className="bg-danger text-light position-absolute text-center py-4 mt-5 w-100">
       <div className="container">
         <h5 className="fw-bold mb-2">Gohash Gulbarga</h5>
         <p className="mb-1">© 2025 All rights reserved.</p>

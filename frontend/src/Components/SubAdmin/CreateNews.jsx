@@ -6,9 +6,11 @@ function CreateNews() {
     title: "",
     description: "",
     link: "",
-    resourceType: "image",
+    // resourceType: "image",
     newsType: "general",
   });
+
+  const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -18,6 +20,7 @@ function CreateNews() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
+      setLoading(true)
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/subAdmin/createNews`,
         {
@@ -37,12 +40,14 @@ function CreateNews() {
         title: "",
         description: "",
         link: "",
-        resourceType: "image",
+        // resourceType: "image",
         newsType: "general",
       });
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      alert(error.response.data.msg);
       console.error(error);
+    } finally{
+      setLoading(false)
     }
   }
 
@@ -103,13 +108,13 @@ function CreateNews() {
               value={formData.link}
               onChange={handleChange}
               className="form-control border border-danger shadow-sm"
-              placeholder="Paste YouTube iframe or image link"
+              placeholder="Paste YouTube link"
               required
             />
           </div>
 
           {/* Resource Type */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label fw-semibold">Resource Type</label>
             <select
               name="resourceType"
@@ -120,7 +125,7 @@ function CreateNews() {
               <option value="image">Image</option>
               <option value="video">Video</option>
             </select>
-          </div>
+          </div> */}
 
           {/* News Type */}
           <div className="mb-4">
@@ -133,16 +138,21 @@ function CreateNews() {
             >
               <option value="general">General</option>
               <option value="dailyBulletin">Headline</option>
+              <option value="ads">Ad</option>
             </select>
           </div>
 
           {/* Submit Button */}
           <div className="d-grid">
-            <button
+          <button
               type="submit"
-              className="btn btn-danger btn-lg fw-bold shadow-sm"
+              className="btn btn-danger fw-bold"
+              disabled={loading}
             >
-              Create News
+              {loading ? (
+                <span className="spinner-border spinner-border-sm me-2"></span>
+              ) : null}
+              {loading ? "Creating News..." : "Create News"}
             </button>
           </div>
         </form>

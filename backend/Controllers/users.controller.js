@@ -22,3 +22,24 @@ export const getArticles = async (req,res) => {
     })
   }
 }
+
+export const sponsoredAds = async (req,res)=>{
+  try {
+    const articles = await createNewsModel.find({type:"ads"})
+    if (!articles) {
+      return res.status(404).json({
+        msg:"No news article found"
+      })
+    }
+
+    res.status(200).json({
+      msg:"fetched successfully",
+      articles:articles
+    })
+  } catch (error) {
+    res.json({
+      msg:"unable to fetch data"
+    })
+  }
+}
+
