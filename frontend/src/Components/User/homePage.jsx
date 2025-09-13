@@ -3,7 +3,6 @@ import YouTube from "react-youtube";
 import axios from "axios";
 import { extractVideoId } from "../utils/youtubeIds";
 import { Modal, Button } from "react-bootstrap";
-import Footer from "./Footer";
 import "./HomePage.css";
 
 function HomePage() {
@@ -35,7 +34,7 @@ function HomePage() {
     } catch (err) {
       console.error("Error fetching homepage data:", err);
     } finally {
-      setLoading(false); // Loading done
+      setLoading(false);
     }
   };
 
@@ -48,6 +47,9 @@ function HomePage() {
   const openModal = (article) => setModalContent(article);
   const closeModal = () => setModalContent(null);
 
+  // -------------------------------
+  // Card Components
+  // -------------------------------
   const NewsCard = ({ article, index, isAd = false }) => {
     const handleVideoClick = (e) => {
       if (!e.target.closest(".ytp-chrome-top, .ytp-button")) {
@@ -152,6 +154,9 @@ function HomePage() {
     );
   };
 
+  // -------------------------------
+  // Data splitting
+  // -------------------------------
   const featuredBulletin = bulletinNews[0];
   const remainingBulletins = bulletinNews.slice(1);
   const sideVideos = generalNews.slice(0, 2);
@@ -248,9 +253,41 @@ function HomePage() {
               </section>
             )}
           </div>
-
-        
         </div>
+      )}
+
+      {/* ✅ FIX: Modal rendering */}
+      {modalContent && (
+        <Modal show={true} onHide={closeModal} centered size="lg" className="article-modal">
+          <Modal.Header closeButton>
+            <Modal.Title>{modalContent.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {modalContent.youtubeIframe && (
+              <div className="modal-video-container">
+                <div className="ratio ratio-16x9">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${extractVideoId(
+                      modalContent.youtubeIframe
+                    )}`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
+            <div className="article-description mt-3">
+              <p>{modalContent.description}</p>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={closeModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       )}
     </>
   );

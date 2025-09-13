@@ -37,6 +37,7 @@ function AllNews() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          marginTop:"2rem"
         }}
       >
         {loader ? (

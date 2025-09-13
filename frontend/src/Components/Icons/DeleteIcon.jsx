@@ -33,7 +33,7 @@ function DeleteIcon({ articleId, setNewsArticles }) {
   }
 
   return (
-    <div>
+    <div title="delete news">
       <svg
   onClick={deleteArticle}
   xmlns="http://www.w3.org/2000/svg"
