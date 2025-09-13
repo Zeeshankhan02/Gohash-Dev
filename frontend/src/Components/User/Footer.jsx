@@ -6,29 +6,6 @@ function Footer() {
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
-          
-          {/* Brand Section */}
-          {/* <div className="footer-brand">
-            <h5 className="brand-title">Gohash Gulbarga</h5>
-            <p className="brand-tagline">Your trusted news source</p>
-            <div className="social-icons">
-              <a href="#" className="social-link" aria-label="Facebook">
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" className="social-link" aria-label="Instagram">
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a href="#" className="social-link" aria-label="Twitter">
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a href="#" className="social-link" aria-label="LinkedIn">
-                <i className="fab fa-linkedin-in"></i>
-              </a>
-              <a href="#" className="social-link" aria-label="YouTube">
-                <i className="fab fa-youtube"></i>
-              </a>
-            </div>
-          </div> */}
 
           {/* Quick Links */}
           <div className="footer-section">

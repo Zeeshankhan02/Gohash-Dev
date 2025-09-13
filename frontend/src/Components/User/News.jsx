@@ -16,10 +16,17 @@ function News() {
       );
       setNewsArticles(res.data.articles.reverse());
     } catch (error) {
-      console.log("Failed to fetch news", error);
-      alert("Something went wrong");
-    } finally {
-      setLoader(false);
+
+      if (error.response) {
+        setLoader(false)
+        
+      } else {
+        setLoader(false)
+        alert("Something went wrong");
+      }
+    } finally{
+      setLoader(false)
+
     }
   }
 

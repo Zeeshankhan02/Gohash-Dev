@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { getEmbedUrl } from "../utils/youtubeIds";
+import DeleteIcon from "../Icons/DeleteIcon";
+
+function NewsArticleCard({ title, youtubeIframe, description, articleId, setNewsArticles }) {
 import { Modal, Button } from "react-bootstrap";
 import "./NewsArticleCard.css";
 
 function NewsArticleCard({ title, youtubeIframe, description }) {
   const [showModal, setShowModal] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false)
   const embedUrl = getEmbedUrl(youtubeIframe);
 
   // Extract thumbnail from YouTube URL for better loading experience
@@ -20,6 +23,21 @@ function NewsArticleCard({ title, youtubeIframe, description }) {
   const handleShow = () => setShowModal(true);
 
   return (
+    <div
+      style={{
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        padding: "16px",
+        margin: "12px 0",
+        boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
+      }}
+    >
+      <div className="d-flex justify-content-between align-items-center">
+      <h5>{title}</h5>
+      {location.pathname === "/secret/subAdmin/articles-created" && (
+        <DeleteIcon articleId={articleId} setNewsArticles={setNewsArticles} />
+      )}
+      </div>
     <>
       <div className="news-article-card">
         {/* Video thumbnail with play button overlay */}
@@ -50,6 +68,7 @@ function NewsArticleCard({ title, youtubeIframe, description }) {
             </div>
           </div>
         )}
+
 
         {/* Card content */}
         <div className="card-content">
