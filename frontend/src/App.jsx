@@ -16,6 +16,7 @@ import AdApplication from "./Components/User/AdApplication";
 import HomeLayout from "./Components/Layouts/HomeLayout";
 import News from "./Components/User/News";
 import HomePage from "./Components/User/homePage";
+import AllNews from "./Components/SubAdmin/AllNews";
 function App() {
   return (
     <BrowserRouter>
@@ -65,6 +66,7 @@ function App() {
         <Route path="/secret/subAdmin" element={<SubAdminLayout/>}>
             <Route index element={<SubAdminLogin/>}/>
             <Route path="create-news" element={<CreateNews/>}/>
+            <Route path="articles-created" element={<AllNews/>}/>
         </Route>
 
         {/* General Routes */}  

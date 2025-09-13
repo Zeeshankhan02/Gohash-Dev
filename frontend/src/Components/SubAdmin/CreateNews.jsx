@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import SubAdminNav from "./SubAdminNav";
 
 function CreateNews() {
   const [formData, setFormData] = useState({
@@ -52,7 +53,9 @@ function CreateNews() {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-start py-5 bg-light min-vh-100">
+    <>
+    <SubAdminNav/>
+    <div className="d-flex justify-content-center align-items-start py-5 bg-light min-vh-100 ">
       <div
         className="card shadow-lg p-5"
         style={{ maxWidth: "650px", width: "100%", borderRadius: "15px" }}
@@ -158,6 +161,7 @@ function CreateNews() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

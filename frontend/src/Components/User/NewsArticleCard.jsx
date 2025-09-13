@@ -1,6 +1,7 @@
 import { getEmbedUrl } from "../utils/youtubeIds";
+import DeleteIcon from "../Icons/DeleteIcon";
 
-function NewsArticleCard({ title, youtubeIframe, description }) {
+function NewsArticleCard({ title, youtubeIframe, description, articleId, setNewsArticles }) {
   const embedUrl = getEmbedUrl(youtubeIframe);
 
   return (
@@ -13,7 +14,12 @@ function NewsArticleCard({ title, youtubeIframe, description }) {
         boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
       }}
     >
-      <h3>{title}</h3>
+      <div className="d-flex justify-content-between align-items-center">
+      <h5>{title}</h5>
+      {location.pathname === "/secret/subAdmin/articles-created" && (
+        <DeleteIcon articleId={articleId} setNewsArticles={setNewsArticles} />
+      )}
+      </div>
 
       {embedUrl && (
         <iframe

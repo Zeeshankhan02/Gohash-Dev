@@ -8,9 +8,9 @@ function Footer() {
         <p className="mb-1">© 2025 All rights reserved.</p>
         <p className="mb-0">
           Follow us on{" "}
-          <a href="#" className="text-light text-decoration-none mx-1">Facebook</a> |{" "}
-          <a href="#" className="text-light text-decoration-none mx-1">Instagram</a> |{" "}
-          <a href="#" className="text-light text-decoration-none mx-1">Twitter</a>
+          <a href="https://www.facebook.com/groups/414811009148915/?ref=share&mibextid=NSMWBT" className="text-light text-decoration-none mx-1">Facebook</a> |{" "}
+          <a href="https://www.instagram.com/gohash_network?igsh=MXd0MjFpeDRkOHp5Zw==" className="text-light text-decoration-none mx-1">Instagram</a> 
+         
         </p>
       </div>
     </footer>

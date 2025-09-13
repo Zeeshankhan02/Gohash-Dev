@@ -14,13 +14,10 @@ function News() {
       const res = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/users/${category}`, // category -> general news or bulletin news
       );
-      console.log(res.data);
-    
       setNewsArticles(res.data.articles.reverse());
       setLoader(false)
     } catch (error) {
       if (error.response) {
-        console.log("failed");
         setLoader(false)
         
       } else {
