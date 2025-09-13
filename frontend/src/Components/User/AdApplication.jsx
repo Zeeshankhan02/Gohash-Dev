@@ -35,7 +35,7 @@ function AdApplication() {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-start py-5 bg-light min-vh-100">
+    <div className="d-flex justify-content-center align-items-start py-5 bg-light min-vh-100 mt-5">
       <div
         className="card shadow-lg p-5"
         style={{ maxWidth: "500px", width: "100%", borderRadius: "15px" }}
