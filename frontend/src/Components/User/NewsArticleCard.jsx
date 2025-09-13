@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { getEmbedUrl } from "../utils/youtubeIds";
-import DeleteIcon from "../Icons/DeleteIcon";
-
-function NewsArticleCard({ title, youtubeIframe, description, articleId, setNewsArticles }) {
 import { Modal, Button } from "react-bootstrap";
+import DeleteIcon from "../Icons/DeleteIcon";
+import { useLocation } from "react-router-dom";
 import "./NewsArticleCard.css";
 
-function NewsArticleCard({ title, youtubeIframe, description }) {
+function NewsArticleCard({ title, youtubeIframe, description, articleId, setNewsArticles }) {
   const [showModal, setShowModal] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false);
   const embedUrl = getEmbedUrl(youtubeIframe);
+  const location = useLocation();
 
-  // Extract thumbnail from YouTube URL for better loading experience
+  // Extract thumbnail from YouTube URL
   const getThumbnailUrl = (url) => {
     if (!url) return null;
     const videoId = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
@@ -23,24 +23,9 @@ function NewsArticleCard({ title, youtubeIframe, description }) {
   const handleShow = () => setShowModal(true);
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        borderRadius: "8px",
-        padding: "16px",
-        margin: "12px 0",
-        boxShadow: "0 2px 5px rgba(0,0,0,0.1)"
-      }}
-    >
-      <div className="d-flex justify-content-between align-items-center">
-      <h5>{title}</h5>
-      {location.pathname === "/secret/subAdmin/articles-created" && (
-        <DeleteIcon articleId={articleId} setNewsArticles={setNewsArticles} />
-      )}
-      </div>
     <>
       <div className="news-article-card">
-        {/* Video thumbnail with play button overlay */}
+        {/* Thumbnail */}
         {embedUrl && (
           <div className="card-media" onClick={handleShow}>
             <div className="thumbnail-container">
@@ -54,7 +39,7 @@ function NewsArticleCard({ title, youtubeIframe, description }) {
               <img
                 src={thumbnailUrl}
                 alt={title}
-                className={`thumbnail-image ${imageLoaded ? 'loaded' : ''}`}
+                className={`thumbnail-image ${imageLoaded ? "loaded" : ""}`}
                 onLoad={() => setImageLoaded(true)}
               />
             </div>
@@ -69,25 +54,29 @@ function NewsArticleCard({ title, youtubeIframe, description }) {
           </div>
         )}
 
-
         {/* Card content */}
         <div className="card-content">
+          {/* Title always on top */}
           <h5 className="card-title">{title}</h5>
-          
-          {/* Read More button */}
-          {description && (
-            <button
-              className="btn-read-more"
-              onClick={handleShow}
-            >
-              Read More
-              <i className="fas fa-arrow-right"></i>
-            </button>
-          )}
+
+          {/* Description preview (optional short version) */}
+          {description && <p className="card-desc small-text text-muted">{description.slice(0, 80)}...</p>}
+
+          <div className="d-flex justify-content-between align-items-center mt-2">
+            {description && (
+              <button className="btn-read-more" onClick={handleShow}>
+                Read More <i className="fas fa-arrow-right"></i>
+              </button>
+            )}
+
+            {location.pathname === "/secret/subAdmin/articles-created" && (
+              <DeleteIcon articleId={articleId} setNewsArticles={setNewsArticles} />
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Modal with full description */}
+      {/* Modal */}
       <Modal show={showModal} onHide={handleClose} centered size="lg" className="article-modal">
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
@@ -106,9 +95,11 @@ function NewsArticleCard({ title, youtubeIframe, description }) {
               </div>
             </div>
           )}
-          <div className="article-description">
-            <p>{description}</p>
-          </div>
+          {description && (
+            <div className="article-description mt-3">
+              <p>{description}</p>
+            </div>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
