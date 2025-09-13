@@ -6,7 +6,6 @@ function CreateNews() {
     title: "",
     description: "",
     link: "",
-    // resourceType: "image",
     newsType: "general",
   });
 
@@ -20,7 +19,7 @@ function CreateNews() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      setLoading(true)
+      setLoading(true);
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/subAdmin/createNews`,
         {
@@ -40,31 +39,53 @@ function CreateNews() {
         title: "",
         description: "",
         link: "",
-        // resourceType: "image",
         newsType: "general",
       });
     } catch (error) {
-      alert(error.response.data.msg);
+      alert(error.response?.data?.msg || "Something went wrong");
       console.error(error);
-    } finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-start py-5 bg-light min-vh-100">
+    <div className="container-fluid d-flex justify-content-center align-items-center bg-light min-vh-100 py-3">
       <div
-        className="card shadow-lg p-5"
-        style={{ maxWidth: "650px", width: "100%", borderRadius: "15px" }}
+        className="card shadow-sm p-3 p-md-4 w-100"
+        style={{
+          maxWidth: "450px",
+          borderRadius: "14px",
+          border: "none",
+          background: "#fff",
+          position: "relative",
+        }}
       >
-        <h2 className="text-center mb-4 fw-bold text-danger">
+        {/* Accent bar */}
+        <div
+          style={{
+            height: "5px",
+            width: "100%",
+            background: "linear-gradient(90deg, #dc3545, #dc3545)",
+            borderRadius: "10px 10px 0 0",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        />
+
+        {/* Heading */}
+        <h4
+          className="text-center fw-bold mb-3"
+          style={{ color: "#dc3545", fontSize: "1.3rem" }}
+        >
           Create News
-        </h2>
+        </h4>
 
         <form onSubmit={handleSubmit}>
           {/* Title */}
           <div className="mb-3">
-            <label htmlFor="title" className="form-label fw-semibold">
+            <label htmlFor="title" className="form-label fw-semibold small">
               Title
             </label>
             <input
@@ -73,33 +94,45 @@ function CreateNews() {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="form-control border border-danger shadow-sm"
-              placeholder="Enter news title"
+              className="form-control"
+              placeholder="News title"
               required
+              style={{
+                borderRadius: "8px",
+                border: "1.5px solid #e0e0e0",
+                padding: "8px 10px",
+                fontSize: "0.9rem",
+              }}
             />
           </div>
 
           {/* Description */}
           <div className="mb-3">
-            <label htmlFor="description" className="form-label fw-semibold">
+            <label htmlFor="description" className="form-label fw-semibold small">
               Description
             </label>
             <textarea
               id="description"
               name="description"
-              rows="4"
+              rows="3"
               value={formData.description}
               onChange={handleChange}
-              className="form-control border border-danger shadow-sm"
-              placeholder="Enter news description"
+              className="form-control"
+              placeholder="News description"
               required
+              style={{
+                borderRadius: "8px",
+                border: "1.5px solid #e0e0e0",
+                padding: "8px 10px",
+                fontSize: "0.9rem",
+              }}
             />
           </div>
 
-          {/* Link */}
+          {/* YouTube Link */}
           <div className="mb-3">
-            <label htmlFor="link" className="form-label fw-semibold">
-              Link
+            <label htmlFor="link" className="form-label fw-semibold small">
+              YouTube Link
             </label>
             <input
               id="link"
@@ -107,34 +140,32 @@ function CreateNews() {
               name="link"
               value={formData.link}
               onChange={handleChange}
-              className="form-control border border-danger shadow-sm"
-              placeholder="Paste YouTube link"
+              className="form-control"
+              placeholder="Paste link"
               required
+              style={{
+                borderRadius: "8px",
+                border: "1.5px solid #e0e0e0",
+                padding: "8px 10px",
+                fontSize: "0.9rem",
+              }}
             />
           </div>
 
-          {/* Resource Type */}
-          {/* <div className="mb-3">
-            <label className="form-label fw-semibold">Resource Type</label>
-            <select
-              name="resourceType"
-              value={formData.resourceType}
-              onChange={handleChange}
-              className="form-select border border-danger shadow-sm"
-            >
-              <option value="image">Image</option>
-              <option value="video">Video</option>
-            </select>
-          </div> */}
-
           {/* News Type */}
-          <div className="mb-4">
-            <label className="form-label fw-semibold">News Type</label>
+          <div className="mb-3">
+            <label className="form-label fw-semibold small">News Type</label>
             <select
               name="newsType"
               value={formData.newsType}
               onChange={handleChange}
-              className="form-select border border-danger shadow-sm"
+              className="form-select"
+              style={{
+                borderRadius: "8px",
+                border: "1.5px solid #e0e0e0",
+                padding: "8px 10px",
+                fontSize: "0.9rem",
+              }}
             >
               <option value="general">General</option>
               <option value="dailyBulletin">Headline</option>
@@ -144,15 +175,26 @@ function CreateNews() {
 
           {/* Submit Button */}
           <div className="d-grid">
-          <button
+            <button
               type="submit"
-              className="btn btn-danger fw-bold"
+              className="btn fw-bold"
               disabled={loading}
+              style={{
+                backgroundColor: "#dc3545",
+                border: "none",
+                borderRadius: "10px",
+                fontSize: "0.95rem",
+                padding: "10px",
+                color: "#fff",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.target.style.backgroundColor = "#dc3545")}
+              onMouseLeave={(e) => (e.target.style.backgroundColor = "#dc3545")}
             >
               {loading ? (
                 <span className="spinner-border spinner-border-sm me-2"></span>
               ) : null}
-              {loading ? "Creating News..." : "Create News"}
+              {loading ? "Saving..." : "Create"}
             </button>
           </div>
         </form>
