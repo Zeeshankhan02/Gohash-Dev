@@ -35,15 +35,36 @@ function SubAdminLogin() {
   }
 
   return (
-    <div className="d-flex align-items-center justify-content-center vh-100 bg-light">
-      <div className="card shadow-lg p-4" style={{ maxWidth: "400px", width: "100%", borderTop: "5px solid #dc3545" }}>
-        <h2 className="text-center mb-4 fw-bold" style={{ color: "#dc3545" }}>
+    <div
+      className="d-flex align-items-center justify-content-center vh-100"
+      style={{
+        background: "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)",
+      }}
+    >
+      <div
+        className="card shadow-lg border-0 p-4"
+        style={{
+          maxWidth: "400px",
+          width: "100%",
+          borderRadius: "16px",
+        }}
+      >
+        {/* Title */}
+        <h3
+          className="text-center mb-3 fw-bold"
+          style={{ color: "#e74c3c" }}
+        >
           Sub Admin Login
-        </h2>
+        </h3>
+        <p className="text-center text-muted small mb-4">
+          Please login to access your dashboard
+        </p>
+
+        {/* Form */}
         <form onSubmit={handleSubmit}>
           {/* Email */}
           <div className="mb-3">
-            <label htmlFor="email" className="form-label fw-semibold">
+            <label htmlFor="email" className="form-label fw-semibold small">
               Email
             </label>
             <input
@@ -52,7 +73,7 @@ function SubAdminLogin() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="form-control"
+              className="form-control rounded-3"
               placeholder="Enter your email"
               required
             />
@@ -60,7 +81,7 @@ function SubAdminLogin() {
 
           {/* Password */}
           <div className="mb-3">
-            <label htmlFor="password" className="form-label fw-semibold">
+            <label htmlFor="password" className="form-label fw-semibold small">
               Password
             </label>
             <input
@@ -70,17 +91,22 @@ function SubAdminLogin() {
               value={formData.password}
               onChange={handleChange}
               autoComplete="off"
-              className="form-control"
+              className="form-control rounded-3"
               placeholder="Enter your password"
               required
             />
           </div>
 
-          {/* Button */}
+          {/* Submit Button */}
           <div className="d-grid">
             <button
               type="submit"
-              className="btn btn-danger fw-bold"
+              className="btn fw-bold rounded-3"
+              style={{
+                backgroundColor: "#dc3545",
+                border: "none",
+                color: "#fff",
+              }}
               disabled={loading}
             >
               {loading ? (
@@ -91,8 +117,12 @@ function SubAdminLogin() {
           </div>
         </form>
 
-        <p className="text-center mt-3 text-muted" style={{ fontSize: "0.9rem" }}>
-          © Gohash SubAdmin Portal
+        {/* Footer */}
+        <p
+          className="text-center mt-3 text-muted"
+          style={{ fontSize: "0.85rem" }}
+        >
+          © 2025 Gohash SubAdmin Portal
         </p>
       </div>
     </div>

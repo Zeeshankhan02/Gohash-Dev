@@ -1,0 +1,229 @@
+/* News.css - Professional Styling */
+
+.news-page-container {
+  padding: 100px 0 50px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Page Header */
+.news-page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  position: relative;
+}
+
+.news-page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #e74c3c, #c0392b);
+  border-radius: 2px;
+}
+
+.news-category-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #e74c3c;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+}
+
+.news-category-subtitle {
+  font-size: 1.1rem;
+  color: #6c757d;
+  font-weight: 300;
+}
+
+/* News Grid */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 0 auto;
+}
+
+/* Loader */
+.news-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.news-loader .spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.news-loader p {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+/* No Articles */
+.no-articles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.no-articles-icon {
+  font-size: 4rem;
+  color: #dee2e6;
+  margin-bottom: 1.5rem;
+}
+
+.no-articles h3 {
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.no-articles p {
+  color: #adb5bd;
+}
+
+/* News Article Card Styles (if you need to override or enhance) */
+.news-article-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.news-article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.news-article-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.news-article-card .card-body {
+  padding: 1.5rem;
+}
+
+.news-article-card .card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.news-article-card .card-text {
+  color: #6c757d;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.news-article-card .btn-read-more {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.news-article-card .btn-read-more:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .news-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  
+  .news-category-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .news-page-container {
+    padding: 90px 0 40px;
+  }
+  
+  .news-page-header {
+    margin-bottom: 2rem;
+    padding: 1.5rem 0;
+  }
+  
+  .news-category-title {
+    font-size: 2rem;
+  }
+  
+  .news-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .news-page-container {
+    padding: 80px 0 30px;
+  }
+  
+  .news-category-title {
+    font-size: 1.8rem;
+  }
+  
+  .news-category-subtitle {
+    font-size: 1rem;
+  }
+  
+  .news-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .news-page-header::after {
+    width: 60px;
+  }
+}
+
+/* Animation for card entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.news-grid > * {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.news-grid > *:nth-child(1) { animation-delay: 0.1s; }
+.news-grid > *:nth-child(2) { animation-delay: 0.2s; }
+.news-grid > *:nth-child(3) { animation-delay: 0.3s; }
+.news-grid > *:nth-child(4) { animation-delay: 0.4s; }
+.news-grid > *:nth-child(5) { animation-delay: 0.5s; }
+.news-grid > *:nth-child(6) { animation-delay: 0.6s; }
+.news-grid > *:nth-child(n+7) { animation-delay: 0.7s; }

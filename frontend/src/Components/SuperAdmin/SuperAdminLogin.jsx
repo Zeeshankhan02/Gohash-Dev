@@ -33,10 +33,21 @@ function SuperAdminLogin() {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div className="card shadow-lg p-4" style={{ maxWidth: "400px", width: "100%", borderTop: "5px solid #dc3545" }}>
-        <h2 className="text-center mb-4 fw-bold" style={{ color: "#dc3545" }}>
-          Super Admin Login
-        </h2>
+      <div
+        className="card shadow-lg p-4"
+        style={{
+          maxWidth: "360px",
+          width: "100%",
+          borderTop: "4px solid #dc3545",
+          borderRadius: "12px",
+        }}
+      >
+        {/* Title */}
+        <h3 className="text-center mb-4 fw-bold" style={{ color: "#dc3545" }}>
+          🔑 Super Admin Login
+        </h3>
+
+        {/* Form */}
         <form onSubmit={handleSubmit}>
           {/* Username */}
           <div className="mb-3">
@@ -46,7 +57,7 @@ function SuperAdminLogin() {
             <input
               type="text"
               id="username"
-              className="form-control"
+              className="form-control rounded-3"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter username"
@@ -63,7 +74,7 @@ function SuperAdminLogin() {
             <input
               type="password"
               id="password"
-              className="form-control"
+              className="form-control rounded-3"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
@@ -76,7 +87,7 @@ function SuperAdminLogin() {
           <div className="d-grid">
             <button
               type="submit"
-              className="btn btn-danger fw-bold"
+              className="btn btn-danger fw-bold rounded-3"
               disabled={loading}
             >
               {loading ? (
@@ -87,7 +98,11 @@ function SuperAdminLogin() {
           </div>
         </form>
 
-        <p className="text-center mt-3 text-muted" style={{ fontSize: "0.9rem" }}>
+        {/* Footer */}
+        <p
+          className="text-center mt-3 text-muted"
+          style={{ fontSize: "0.85rem" }}
+        >
           © Gohash SuperAdmin Portal
         </p>
       </div>
