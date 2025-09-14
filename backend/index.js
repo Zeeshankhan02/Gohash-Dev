@@ -33,8 +33,10 @@ app.use('/api/v1/subAdmin', subAdmin);
 app.use('/api/v1/users', userRouter);
 app.use("/api/v1/subAdmin", createNewsRoutes);
 
-app.get('/',(req,res)=>{
-  req
+app.get('/healthcheck',(req,res)=>{
+  req.json({
+    msg:"backend up an running"
+  })
 })
 
 app.listen(process.env.PORT, () => {
