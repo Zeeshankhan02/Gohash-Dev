@@ -178,28 +178,32 @@ function CreateNews() {
 
           {/* Submit Button */}
           <div className="d-grid">
-            <button
-              type="submit"
-              className="btn fw-bold"
-              disabled={loading}
-              style={{
-                backgroundColor: "#dc3545",
-                border: "none",
-                borderRadius: "10px",
-                fontSize: "0.95rem",
-                padding: "10px",
-                color: "#fff",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => (e.target.style.backgroundColor = "#dc3545")}
-              onMouseLeave={(e) => (e.target.style.backgroundColor = "#dc3545")}
-            >
-              {loading ? (
-                <span className="spinner-border spinner-border-sm me-2"></span>
-              ) : null}
-              {loading ? "Saving..." : "Create"}
-            </button>
-          </div>
+  <button
+    type="submit"
+    className="btn fw-bold d-flex align-items-center justify-content-center rounded-3"
+    disabled={loading}
+    style={{
+      backgroundColor: "#dc3545",
+      border: "none",
+      borderRadius: "10px",
+      fontSize: "0.95rem",
+      padding: "10px",
+      color: "#fff",
+      transition: "all 0.3s ease",
+    }}
+  >
+    {loading && (
+      <span
+        className="spinner-border spinner-border-sm me-2"
+        role="status"
+        aria-hidden="true"
+        style={{ width: "0.9rem", height: "0.9rem" }}
+      ></span>
+    )}
+    {loading ? "Creating News..." : "Create News"}
+  </button>
+</div>
+
         </form>
       </div>
     </div>
