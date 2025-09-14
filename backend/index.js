@@ -32,11 +32,21 @@ app.use('/api/v1/superAdmin', superAdminRouter);
 app.use('/api/v1/subAdmin', subAdmin);
 app.use('/api/v1/users', userRouter);
 app.use("/api/v1/subAdmin", createNewsRoutes);
+<<<<<<< HEAD
 app.get('/', (req ,res)=>{
   res.json({
     messege:"working"
   })
 })
+=======
+
+app.get('/healthcheck',(req,res)=>{
+  res.json({
+    msg:"backend up an running"
+  })
+})
+
+>>>>>>> 97923add420845daa1bea419fc287d6a635eeb26
 app.listen(process.env.PORT, () => {
   console.log('Server is Running');
 });

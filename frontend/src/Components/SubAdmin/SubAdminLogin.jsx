@@ -7,53 +7,47 @@ function SubAdminLogin() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  function handleChange(e) {
+  // Handle form field updates
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  }
+  };
 
-  async function handleSubmit(e) {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      setLoading(true);
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/subAdmin/login`,
-        { email: formData.email, password: formData.password }
+        formData
       );
 
       localStorage.setItem("subAdminToken", res.data.token);
       navigate("create-news");
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.msg);
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
+      const msg =
+        error.response?.data?.msg || "Something went wrong. Please try again.";
+      alert(msg);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div
-      className="d-flex align-items-center justify-content-center vh-100"
+      className="d-flex align-items-center justify-content-center vh-100 bg-light"
       style={{
         background: "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)",
       }}
     >
       <div
         className="card shadow-lg border-0 p-4"
-        style={{
-          maxWidth: "400px",
-          width: "100%",
-          borderRadius: "16px",
-        }}
+        style={{ maxWidth: "400px", width: "100%", borderRadius: "16px" }}
       >
         {/* Title */}
-        <h3
-          className="text-center mb-3 fw-bold"
-          style={{ color: "#e74c3c" }}
-        >
+        <h3 className="text-center mb-3 fw-bold text-danger">
           Sub Admin Login
         </h3>
         <p className="text-center text-muted small mb-4">
@@ -101,27 +95,25 @@ function SubAdminLogin() {
           <div className="d-grid">
             <button
               type="submit"
-              className="btn fw-bold rounded-3"
-              style={{
-                backgroundColor: "#dc3545",
-                border: "none",
-                color: "#fff",
-              }}
+              className="btn fw-bold rounded-3 d-flex align-items-center justify-content-center"
+              style={{ backgroundColor: "#dc3545", color: "#fff" }}
               disabled={loading}
             >
-              {loading ? (
-                <span className="spinner-border spinner-border-sm me-2"></span>
-              ) : null}
+              {loading && (
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                  style={{ width: "0.9rem", height: "0.9rem" }}
+                ></span>
+              )}
               {loading ? "Logging in..." : "Login"}
             </button>
           </div>
         </form>
 
         {/* Footer */}
-        <p
-          className="text-center mt-3 text-muted"
-          style={{ fontSize: "0.85rem" }}
-        >
+        <p className="text-center mt-3 text-muted small mb-0">
           © 2025 Gohash SubAdmin Portal
         </p>
       </div>

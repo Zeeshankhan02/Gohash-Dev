@@ -94,11 +94,11 @@ function AdApplication() {
           <div className="d-grid">
             <button
               type="submit"
-              className="btn btn-danger btn-lg fw-bold shadow-sm"
+              className="btn btn-danger btn-lg fw-bold shadow-sm d-flex align-items-center justify-content-center"
               disabled={loading}
             >
               {loading ? (
-                <span className="spinner-border spinner-border-sm me-2"></span>
+                <span className="spinner-border spinner-border-sm me-2" style={{ width: "0.9rem", height: "0.9rem" }}></span>
               ) : null}
               {loading ? "Submitting..." : "Apply Now"}
             </button>
