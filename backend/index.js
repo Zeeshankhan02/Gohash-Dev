@@ -33,6 +33,10 @@ app.use('/api/v1/subAdmin', subAdmin);
 app.use('/api/v1/users', userRouter);
 app.use("/api/v1/subAdmin", createNewsRoutes);
 
+app.get('/',(req,res)=>{
+  req
+})
+
 app.listen(process.env.PORT, () => {
   console.log('Server is Running');
 });
