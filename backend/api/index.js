@@ -43,11 +43,4 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/subAdmin", createNewsRoutes);
 
 
-app.get('/',(req,res)=>{
-  res.json({
-    msg:"The backend is working properly"
-  })
-})
-
-
 export default serverless(app);
