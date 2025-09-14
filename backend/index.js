@@ -34,7 +34,7 @@ app.use('/api/v1/users', userRouter);
 app.use("/api/v1/subAdmin", createNewsRoutes);
 
 app.get('/healthcheck',(req,res)=>{
-  req.json({
+  res.json({
     msg:"backend up an running"
   })
 })
