@@ -11,7 +11,6 @@ function HomePage() {
   const [generalNews, setGeneralNews] = useState([]);
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [modalContent, setModalContent] = useState(null);
 
   const handlePlay = (index) => {
     players.current.forEach((player, i) => {
@@ -44,113 +43,164 @@ function HomePage() {
     return () => clearInterval(interval);
   }, []);
 
-  const openModal = (article) => setModalContent(article);
-  const closeModal = () => setModalContent(null);
-
   // -------------------------------
-  // Card Components
+  // Card Components (with local modal)
   // -------------------------------
   const NewsCard = ({ article, index, isAd = false }) => {
-    const handleVideoClick = (e) => {
-      if (!e.target.closest(".ytp-chrome-top, .ytp-button")) {
-        e.stopPropagation();
-        openModal(article);
-      }
-    };
+    const [showModal, setShowModal] = useState(false);
 
     return (
-      <div
-        className={`card news-card h-100 ${isAd ? "ad-card" : ""} clickable-card`}
-        onClick={() => article.description && openModal(article)}
-      >
-        {article.youtubeIframe && (
-          <div className="card-img-top video-container" onClick={handleVideoClick}>
-            <YouTube
-              videoId={extractVideoId(article.youtubeIframe)}
-              opts={{ ...opts, height: "140" }}
-              onReady={(e) => (players.current[index] = e.target)}
-              onPlay={() => handlePlay(index)}
-              className="youtube-iframe"
-            />
-            <div className="video-overlay">
-              <div className="play-button-overlay">
-                <div className="play-button">
-                  <i className="fas fa-play"></i>
+      <>
+        <div
+          className={`card news-card h-100 ${isAd ? "ad-card" : ""} clickable-card`}
+          onClick={() => article.description && setShowModal(true)}
+        >
+          {article.youtubeIframe && (
+            <div className="card-img-top video-container">
+              <YouTube
+                videoId={extractVideoId(article.youtubeIframe)}
+                opts={{ ...opts, height: "140" }}
+                onReady={(e) => (players.current[index] = e.target)}
+                onPlay={() => handlePlay(index)}
+                className="youtube-iframe"
+              />
+              <div className="video-overlay">
+                <div className="play-button-overlay">
+                  <div className="play-button">
+                    <i className="fas fa-play"></i>
+                  </div>
+                </div>
+                <div className="video-indicator">
+                  <i className="fas fa-video"></i> Video
                 </div>
               </div>
-              <div className="video-indicator">
-                <i className="fas fa-video"></i> Video
-              </div>
             </div>
-          </div>
-        )}
-        <div className="card-body d-flex flex-column">
-          <h6 className="card-title fw-bold">{article.title}</h6>
-          {article.description && (
-            <button
-              className="btn btn-read-more mt-auto align-self-start"
-              onClick={(e) => {
-                e.stopPropagation();
-                openModal(article);
-              }}
-            >
-              Read More
-            </button>
           )}
+          <div className="card-body d-flex flex-column">
+            <h6 className="card-title fw-bold">{article.title}</h6>
+            {article.description && (
+              <button
+                className="btn btn-read-more mt-auto align-self-start"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowModal(true);
+                }}
+              >
+                Read More
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+
+        {/* Modal for this card only */}
+        <Modal show={showModal} onHide={() => setShowModal(false)} centered size="lg" className="article-modal">
+          <Modal.Header closeButton>
+            <Modal.Title>{article.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {article.youtubeIframe && (
+              <div className="modal-video-container">
+                <div className="ratio ratio-16x9">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${extractVideoId(article.youtubeIframe)}`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
+            <div className="article-description mt-3">
+              <p>{article.description}</p>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={() => setShowModal(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
     );
   };
 
   const FeaturedCard = ({ article }) => {
-    const handleVideoClick = (e) => {
-      if (!e.target.closest(".ytp-chrome-top, .ytp-button")) {
-        e.stopPropagation();
-        openModal(article);
-      }
-    };
+    const [showModal, setShowModal] = useState(false);
 
     return (
-      <div
-        className="featured-card card border-0 h-100 clickable-card"
-        onClick={() => article.description && openModal(article)}
-      >
-        {article.youtubeIframe && (
-          <div className="featured-video video-container" onClick={handleVideoClick}>
-            <YouTube
-              videoId={extractVideoId(article.youtubeIframe)}
-              opts={{ ...opts, height: "300" }}
-              onReady={(e) => (players.current[0] = e.target)}
-              onPlay={() => handlePlay(0)}
-              className="youtube-iframe"
-            />
-            <div className="video-overlay">
-              <div className="play-button-overlay">
-                <div className="play-button">
-                  <i className="fas fa-play"></i>
+      <>
+        <div
+          className="featured-card card border-0 h-100 clickable-card"
+          onClick={() => article.description && setShowModal(true)}
+        >
+          {article.youtubeIframe && (
+            <div className="featured-video video-container">
+              <YouTube
+                videoId={extractVideoId(article.youtubeIframe)}
+                opts={{ ...opts, height: "300" }}
+                onReady={(e) => (players.current[0] = e.target)}
+                onPlay={() => handlePlay(0)}
+                className="youtube-iframe"
+              />
+              <div className="video-overlay">
+                <div className="play-button-overlay">
+                  <div className="play-button">
+                    <i className="fas fa-play"></i>
+                  </div>
+                </div>
+                <div className="video-indicator">
+                  <i className="fas fa-video"></i> Video
                 </div>
               </div>
-              <div className="video-indicator">
-                <i className="fas fa-video"></i> Video
-              </div>
             </div>
-          </div>
-        )}
-        <div className="card-body">
-          <h2 className="featured-title">{article.title}</h2>
-          {article.description && (
-            <button
-              className="btn btn-read-more mt-2"
-              onClick={(e) => {
-                e.stopPropagation();
-                openModal(article);
-              }}
-            >
-              Read Full Story
-            </button>
           )}
+          <div className="card-body">
+            <h2 className="featured-title">{article.title}</h2>
+            {article.description && (
+              <button
+                className="btn btn-read-more mt-2"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowModal(true);
+                }}
+              >
+                Read Full Story
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+
+        {/* Modal for featured card only */}
+        <Modal show={showModal} onHide={() => setShowModal(false)} centered size="lg" className="article-modal">
+          <Modal.Header closeButton>
+            <Modal.Title>{article.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {article.youtubeIframe && (
+              <div className="modal-video-container">
+                <div className="ratio ratio-16x9">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${extractVideoId(article.youtubeIframe)}`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
+            <div className="article-description mt-3">
+              <p>{article.description}</p>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={() => setShowModal(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
     );
   };
 
@@ -254,40 +304,6 @@ function HomePage() {
             )}
           </div>
         </div>
-      )}
-
-      {/* ✅ FIX: Modal rendering */}
-      {modalContent && (
-        <Modal show={true} onHide={closeModal} centered size="lg" className="article-modal">
-          <Modal.Header closeButton>
-            <Modal.Title>{modalContent.title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {modalContent.youtubeIframe && (
-              <div className="modal-video-container">
-                <div className="ratio ratio-16x9">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${extractVideoId(
-                      modalContent.youtubeIframe
-                    )}`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-            )}
-            <div className="article-description mt-3">
-              <p>{modalContent.description}</p>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="primary" onClick={closeModal}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
       )}
     </>
   );
