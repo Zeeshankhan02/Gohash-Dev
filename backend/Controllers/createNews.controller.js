@@ -1,25 +1,7 @@
 // controllers/createNews.controller.js
 import { createNewsModel } from "../Models/createNews.model.js";
 import { subAdminModel } from "../Models/subAdmin.model.js";
-import jwt from "jsonwebtoken";
 
-// JWT verification middleware
-export const verifyToken = (req, res, next) => {
-  const authHeader = req.headers["authorization"];
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ msg: "No token provided" });
-  }
-
-  const token = authHeader.split(" ")[1];
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // { id, email, role }
-    next();
-  } catch (err) {
-    return res.status(401).json({ msg: "Invalid or expired token" });
-  }
-};
 
 // SubAdmin creates news
 export const createNews = async (req, res) => {
