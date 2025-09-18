@@ -20,15 +20,10 @@ const uploadOnCloudinary=async (localFilePath) => {
       folder: "clientVideos"
     })
 
-    // file has been uploaded successfully
-    console.log("File is uploaded on cloudinary",response.secure_url);
-
      fs.unlinkSync(localFilePath) //deleting the video from the local server after successfull upload
     return response
   } catch (error) {
     fs.unlinkSync(localFilePath) // removes the locally saved temp file if the upload operatoin failed
-    console.log(error);
-    
     return null
   }
 }

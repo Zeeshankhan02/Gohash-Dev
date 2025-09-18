@@ -8,18 +8,12 @@ export const loginPost = async function (req, res) {
   try {
     const { email, password } = req.body;
 
-    // Debugging logs
-    // console.log("Email:", email);
-    // console.log("Password from body:", password);
 
     // 1. Find user
     const subAdmin = await subAdminModel.findOne({ email });
     if (!subAdmin) {
       return res.status(404).json({ msg: "SubAdmin not found" });
     }
-
-    // console.log("User from DB:", subAdmin);
-    // console.log("Password in DB:", subAdmin.password);
 
     // 2. Compare password
     const isMatch = await bcrypt.compare(password, subAdmin.password);
@@ -51,54 +45,6 @@ export const loginPost = async function (req, res) {
 };
 
 
-// Upload controller for SubAdmin
-// export const uploadMedia = async (req, res) => {
-//   try {
-//     // Multer should provide req.file
-//     if (!req.file) {
-//       return res.status(400).json({ success: false, msg: "Video file not selected" });
-//     }
-
-//     // Upload to Cloudinary
-//     const cloudinaryResponse = await uploadOnCloudinary(req.file.path);
-//     if (!cloudinaryResponse) {
-//       return res.status(500).json({ success: false, msg: "Upload to Cloudinary failed" });
-//     }
-
-//     const videoUrl = cloudinaryResponse.secure_url;
-//     console.log(videoUrl);
-    
-
-//     // 2. Trigger Make.com webhook using axios
-//     const payload = {
-//       title: req.body.title || "Untitled Video",
-//       description: req.body.description || "No description",
-//       videoUrl: videoUrl, // Cloudinary direct URL
-//     };
-
-//     console.log("playload: ",payload);
-    
-//     const makeResponse = await axios.post(process.env.MAKE_WEBHOOK_URL, payload, {
-//       headers: { "Content-Type": "application/json" },
-//     });
-
-//     console.log(makeResponse);
-    
-
-//     // 3. Send response back to frontend
-//     res.status(200).json({
-//       success: true,
-//       message: "Video uploaded & webhook triggered successfully",
-//       videoUrl,
-//       public_id: cloudinaryResponse.public_id,
-//     });
-    
-//   } catch (error) {
-//     console.error("Upload Error:", error);
-//     // return res.status(500).json({ success: false, msg: "Internal Server Error" });
-//     return res.status(500).send(error.response.data)
-//   }
-// };
 export const uploadMedia = async (req, res) => {
   try {
     if (!req.file) {
@@ -130,9 +76,9 @@ export const uploadMedia = async (req, res) => {
       description: payload.description,
       youtubeIframe: `https://www.youtube.com/watch?v=${makeResponse.data.youtube.videoId}`,
       type: payload.type,
-      createdBy: req.user.id, // ✅ Use JWT user
+      createdBy: req.user.id, // Use JWT user
       cloudinaryUrl: videoUrl,
-      public_id: cloudinaryResponse.public_id // ✅ Store for deletion later
+      public_id: cloudinaryResponse.public_id //  Store for deletion later
     });
 
     await news.save();
