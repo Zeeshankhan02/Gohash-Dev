@@ -1,9 +1,11 @@
 import multer from 'multer'
+import { ensureTempDirExists } from '../utils/tempDir.js';
 
 
 const storage = multer.diskStorage({
   destination:function (req,file,cb) {
-        cb(null,'./uploads/temp')
+    const tempDir = ensureTempDirExists();
+    cb(null, tempDir);
   },
   filename: function (req,file,cb) {
     cb(null,file.originalname)
