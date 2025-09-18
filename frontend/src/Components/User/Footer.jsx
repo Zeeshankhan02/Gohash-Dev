@@ -55,11 +55,11 @@ function Footer() {
                <div className="footer-section">
             <h6 className="footer-heading">Follow Us</h6>
             <ul className="footer-links">
-              <li><a href="https://www.instagram.com/gohash_network/" className="footer-link"><i class=" fa-brands fa-instagram"></i> instagram</a></li>
+              <li><a href="https://www.instagram.com/gohash_network/" className="footer-link"><i className=" fa-brands fa-instagram"></i> instagram</a></li>
               
               <li><a href="https://www.facebook.com/gohash.tv/" className="footer-link">  
-               <i class="fa-brands fa-facebook"></i> Facebook</a></li>
-              <li><a href="https://www.youtube.com/@gohash22" className="footer-link">   <i class="fa-brands fa-youtube"></i> youtube</a></li>
+               <i className="fa-brands fa-facebook"></i> Facebook</a></li>
+              <li><a href="https://www.youtube.com/@gohash22" className="footer-link">   <i className="fa-brands fa-youtube"></i> youtube</a></li>
               
             </ul>
           </div>
